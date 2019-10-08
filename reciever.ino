@@ -4,10 +4,13 @@
 #include <RF24.h>
 #include <RF24_config.h>
 #include <Servo.h>
+
+void sendvals();
+
 Servo servo;
 
 RF24 radio(7, 8); // CSN, CE
-const byte address[6] = "00001";
+const byte addresses[][6] = {"00001", "00002"};
 int servo_pin = 9;
 int sensor_pin=A0;
 int output_value;
@@ -16,10 +19,13 @@ void setup() {
   Serial.begin(9600);
   radio.begin();
   servo.attach (servo_pin ) ;
-  radio.openReadingPipe(0, address);
+  radio.openWritingPipe(addresses[0]); // 00001
+  radio.openReadingPipe(1, addresses[1]); // 00002
   radio.setPALevel(RF24_PA_MIN);
   radio.setChannel(87);
   radio.setDataRate(RF24_250KBPS);
+  sendvals();
+  delay(10);
   radio.startListening();
 }
 int pos;
@@ -83,4 +89,17 @@ void loop() {
     Serial.println("connection lost");  
   }
  
+}
+
+void sendvals()
+{
+  // this function is to send the temp values to make a dataset...
+  radio.stopListening();
+  int i=0;
+  for(i=0;i<3000;i++){
+   // write the code for lm35 to take input of temp sensor
+   // radio.write(&temprature, sizeof(temperature));
+   // delay(10);
+  }
+  
 }

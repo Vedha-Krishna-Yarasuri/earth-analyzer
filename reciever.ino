@@ -24,7 +24,6 @@ void setup() {
 }
 int pos;
 void loop() {
-while(radio.available()){
   if (radio.available()) {
     radio.read(&pos, sizeof(pos));
     Serial.println(pos);
@@ -78,7 +77,6 @@ while(radio.available()){
      delay(10);
     //  Serial.println("gk7");
     }
-  }
   }
   else
   {

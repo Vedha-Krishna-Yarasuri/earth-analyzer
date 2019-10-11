@@ -7,10 +7,10 @@ for i=1:3000
     dataset=[dataset ans];
 end
 
-training_class_name = hepatitis(1:2800,3:3);
-training_data = hepatitis(1:2800,1:2);
-validating_class_names = hepatitis(2801:3000,3:3);
-validating_data = hepatitis(2801:3000,1:2);
+training_class_name = dataset(1:2800,3:3);
+training_data = dataset(1:2800,1:2);
+validating_class_names = dataset(2801:3000,3:3);
+validating_data = dataset(2801:3000,1:2);
 
 % getting the svm model using fitcsvm function
 SVM_model=fitcsvm(training_data,training_class_name);
